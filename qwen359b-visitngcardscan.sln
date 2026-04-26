@@ -1,5 +1,25 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Solution File, Copyright © 2022
-# Required Style Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qwen359b-VisitingCardScan", "Qwen359b-VisitingCardScan.csproj", "{GUID_FOR_PROJECT}"
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11716.220 stable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qwen359b-visitngcardscan", "qwen359b-visitngcardscan.csproj", "{7D230FB6-A233-B4CE-396D-96DB2E468536}"
 EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D230FB6-A233-B4CE-396D-96DB2E468536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D230FB6-A233-B4CE-396D-96DB2E468536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D230FB6-A233-B4CE-396D-96DB2E468536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D230FB6-A233-B4CE-396D-96DB2E468536}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1876250-C789-4FFF-9871-EA403870CD11}
+	EndGlobalSection
+EndGlobal
