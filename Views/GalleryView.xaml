@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Qwen359b.ViewModels"
+             x:Class="Qwen359b.Views.GalleryView"
+             Title="Media Gallery">
+
+    <ContentPage.BindingContext>
+        <local:GalleryViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="Auto, *">
+        <!-- Top Bar for View Mode Toggling -->
+        <HorizontalStackLayout Grid.Row="0" Padding="10" Spacing="15">
+            <Button Text="View All Media" Clicked="ToggleGalleryView_Clicked" />
+            <Button Text="Select Item" Clicked="ToggleSelectionMode_Clicked" />
+        </HorizontalStackLayout>
+
+        <!-- Gallery View (Grid/List) -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding MediaItems}"
+                        ItemTemplate="{StaticResource MediaItemTemplate}"
+                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreMediaCommand}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedMediaItem}">
+            <CollectionView.EmptyView>
+                <Label Text="No media found in the selected directories." HorizontalOptions="Center" VerticalOptions="Center" />
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </Grid>
+
+    <!-- Resource Dictionary for Item Template -->
+    <ContentPage.Resources>
+        <DataTemplate x:Key="MediaItemTemplate">
+            <Border Margin="5" CornerRadius="8" Padding="0">
+                <Grid RowDefinitions="*, Auto">
+                    <!-- Thumbnail/Image Display Area -->
+                    <Image x:Name="ThumbnailImage" Grid.Row="0"
+                           Source="{Binding ThumbnailSource}"
+                           Aspect="AspectFill"
+                           HeightRequest="200"/>
+                    
+                    <!-- File Info Footer -->
+                    <Label Grid.Row="1"
+                           Text="{Binding FileName}"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           Margin="5, 5, 5, 0"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+</ContentPage>
