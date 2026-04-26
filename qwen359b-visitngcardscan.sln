@@ -1,0 +1,5 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Solution File, Copyright © 2022
+# Required Style Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qwen359b-VisitingCardScan", "Qwen359b-VisitingCardScan.csproj", "{GUID_FOR_PROJECT}"
+EndProject
