@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2022/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Primary Colors -->
+    <Color x:Key="Primary">#512BD4</Color>
+    <Color x:Key="Secondary">#DE381E</Color>
+    <Color x:Key="Tertiary">#8B5CF6</Color>
+
+    <!-- Neutral Colors -->
+    <Color x:Key="White">White</Color>
+    <Color x:Key="Black">Black</Color>
+    <Color x:Key="Magenta">#D602E0</Color>
+    <Color x:Key="MidnightBlue">#190650</Color>
+
+    <!-- Semantic Colors -->
+    <Color x:Key="SuccessGreen">#2E7D32</Color>
+    <Color x:Key="ErrorRed">#C62828</Color>
+    <Color x:Key="WarningOrange">#EF6C00</Color>
+
+    <!-- Background Colors -->
+    <Color x:Key="PageBackgroundColor">#F5F5F5</Color>
+    <Color x:Key="ButtonTextColor">White</Color>
+
+    <!-- Text Colors -->
+    <Color x:Key="PrimaryText">Black</Color>
+    <Color x:Key="SecondaryText">Gray</Color>
+
+</ResourceDictionary>

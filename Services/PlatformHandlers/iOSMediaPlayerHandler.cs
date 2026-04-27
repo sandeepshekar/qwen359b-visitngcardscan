@@ -49,3 +49,4 @@ public class iOSMediaPlayerHandler : IPlatformMediaPlayer
     {
         Stop();
     }
+}

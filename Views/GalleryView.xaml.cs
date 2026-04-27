@@ -1,6 +1,5 @@
 using Microsoft.Maui.Controls;
 using Qwen359b.ViewModels;
-using System.Threading.Tasks;
 
 namespace Qwen359b.Views;
 
@@ -8,30 +7,35 @@ public partial class GalleryView : ContentPage
 {
     private readonly MediaViewerViewModel _viewModel;
 
-    public GalleryView()
+    public GalleryView(MediaViewerViewModel viewModel)
     {
         InitializeComponent();
-        // Assuming the BindingContext is set in XAML, we can cast it here for access if needed, 
-        // but generally, interaction should go through commands/properties.
-        _viewModel = (MediaViewerViewModel)BindingContext;
+        BindingContext = viewModel;
+        _viewModel = viewModel;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        // Load media when the page appears
+        if (_selectedDirectories.Count == 0)
+        {
+            await _viewModel.LoadMediaAsync(_defaultDirectories);
+        }
+    }
+
+    private List<string> _defaultDirectories = new List<string>();
 
     private void ToggleGalleryView_Clicked(object sender, EventArgs e)
     {
         // Toggles the view mode using the ViewModel logic.
-        if (_viewModel != null)
-        {
-            _viewModel.ToggleViewMode();
-        }
+        _viewModel?.ToggleViewMode();
     }
 
     private void ToggleSelectionMode_Clicked(object sender, EventArgs e)
     {
         // Toggles the view mode using the ViewModel logic.
-        if (_viewModel != null)
-        {
-            _viewModel.ToggleViewMode();
-        }
+        _viewModel?.ToggleViewMode();
     }
 
     // Event handler for item selection (assuming CollectionView is configured to handle this)

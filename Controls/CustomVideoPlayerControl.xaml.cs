@@ -1,21 +1,18 @@
 using Microsoft.Maui.Controls;
 using Qwen359b.Services;
-using System;
-using System.Threading.Tasks;
 
 namespace Qwen359b.Controls;
 
 public partial class CustomVideoPlayerControl : ContentView
 {
     private readonly IPlatformMediaPlayer _player;
-    private readonly IImageLoadingService _imageLoaderService; // Keep this for potential image fallback/thumbnail display
+    private readonly IImageLoadingService _imageLoaderService;
 
-    public CustomVideoPlayerControl()
+    public CustomVideoPlayerControl(IPlatformMediaPlayer player, IImageLoadingService imageLoaderService)
     {
         InitializeComponent();
-        // Dependency Injection will provide the correct platform handler implementation.
-        _player = (IPlatformMediaPlayer)DependencyService.Get("PlatformMediaPlayer"); 
-        _imageLoaderService = DependencyService.Get<IImageLoadingService>();
+        _player = player ?? throw new ArgumentNullException(nameof(player));
+        _imageLoaderService = imageLoaderService ?? throw new ArgumentNullException(nameof(imageLoaderService));
     }
 
     public async Task InitializeAndPlayAsync(string filePath, MediaItem mediaItem)

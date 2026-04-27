@@ -44,8 +44,6 @@ public class MediaViewerViewModel : INotifyPropertyChanged
         }
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
-
     public MediaViewerViewModel(IMediaService mediaService, IVideoService videoService, IImageLoadingService imageLoaderService)
     {
         _mediaService = mediaService ?? throw new ArgumentNullException(nameof(mediaService));
@@ -106,6 +104,7 @@ public class MediaViewerViewModel : INotifyPropertyChanged
         {
             // For images, load the optimized stream and update the view's image source.
             await LoadImageForDisplayAsync(item);
+        }
     }
 
     private async Task PlayVideo(MediaItem videoItem)

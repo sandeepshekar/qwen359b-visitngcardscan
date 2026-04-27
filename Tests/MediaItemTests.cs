@@ -1,6 +1,6 @@
 using Xunit;
 using System;
-using qwen359b-visitngcardscan.Models; // Assuming this namespace is correct for the project structure
+using Qwen359b.Models;
 
 namespace Tests
 {
@@ -9,55 +9,60 @@ namespace Tests
         [Fact]
         public void MediaItem_Constructor_ShouldInitializePropertiesCorrectly()
         {
-            // Arrange
-            string testPath = "C:\\path\\to\\test.jpg";
-            string displayName = "Test Image";
-            string mediaType = "Image";
-
-            // Act
-            var item = new MediaItem(testPath, displayName, mediaType);
+            // Arrange - The current MediaItem model doesn't have a constructor with these parameters
+            // This test needs to be updated to match the actual model structure
+            var item = new MediaItem
+            {
+                FilePath = "C:\\path\\to\\test.jpg",
+                FileName = "Test Image",
+                MediaType = MediaType.Image,
+                ThumbnailSource = string.Empty
+            };
 
             // Assert
-            Assert.Equal(testPath, item.FilePath);
-            Assert.Equal(displayName, item.DisplayName);
-            Assert.Equal(mediaType, item.MediaType);
+            Assert.Equal("C:\\path\\to\\test.jpg", item.FilePath);
+            Assert.Equal("Test Image", item.FileName);
+            Assert.Equal(MediaType.Image, item.MediaType);
         }
 
         [Fact]
         public void MediaItem_ShouldHandleNullOrEmptyInputsGracefully()
         {
             // Arrange
-            string nullPath = null;
-            string emptyName = "";
-            string unknownType = "Unknown";
+            var item1 = new MediaItem
+            {
+                FilePath = null,
+                FileName = string.Empty,
+                MediaType = MediaType.Unknown,
+                ThumbnailSource = string.Empty
+            };
 
-            // Act & Assert (Assuming the model handles these gracefully or throws expected exceptions)
-            var item1 = new MediaItem(nullPath, "", unknownType);
-            Assert.Null(item1.FilePath); // Or assert it defaults to a safe value if validation is in place
-            Assert.Empty(item1.DisplayName);
+            // Assert
+            Assert.Null(item1.FilePath);
+            Assert.Empty(item1.FileName);
         }
 
         [Fact]
         public void MediaItem_ShouldUpdatePropertiesCorrectly()
         {
             // Arrange
-            var item = new MediaItem("old/path.jpg", "Old Name", "Image");
+            var item = new MediaItem
+            {
+                FilePath = "old/path.jpg",
+                FileName = "Old Name",
+                MediaType = MediaType.Image,
+                ThumbnailSource = string.Empty
+            };
 
             // Act
-            string newPath = "new/updated/path.png";
-            string newName = "New Awesome Photo";
-            string newType = "Image"; // Assuming type might change or be confirmed later
-
-            item.FilePath = newPath;
-            item.DisplayName = newName;
-            // If MediaType is read-only, we test that it remains constant or can only be set via a specific method.
-            // For simplicity, assuming direct property setting for now.
-            item.MediaType = newType; 
+            item.FilePath = "new/updated/path.png";
+            item.FileName = "New Awesome Photo";
+            item.MediaType = MediaType.Video;
 
             // Assert
-            Assert.Equal(newPath, item.FilePath);
-            Assert.Equal(newName, item.DisplayName);
-            Assert.Equal(newType, item.MediaType);
+            Assert.Equal("new/updated/path.png", item.FilePath);
+            Assert.Equal("New Awesome Photo", item.FileName);
+            Assert.Equal(MediaType.Video, item.MediaType);
         }
     }
 }
