@@ -6,9 +6,9 @@ using Qwen359b.Services;
 namespace Qwen359b.Services;
 
 /// <summary>
-/// Concrete implementation of IImageLoadingService using MAUI/platform capabilities for caching.
+/// Concrete implementation of IImageLoaderService using MAUI/platform capabilities for caching.
 /// </summary>
-public class ImageLoadingService : IImageLoadingService
+public class ImageLoadingService : IImageLoaderService
 {
     // In a real application, this would use platform-specific image libraries (e.g., SkiaSharp, FFImageLoading).
 

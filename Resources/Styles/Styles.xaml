@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ResourceDictionary 
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/dotnet/2022/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:Qwen359b.Converters">
 
     <!-- Button Styles -->
     <Style x:Key="ButtonBaseStyle" TargetType="Button">
@@ -23,5 +24,8 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="TextColor" Value="Black" />
     </Style>
+
+    <!-- Boolean Inverse Converter -->
+    <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
 
 </ResourceDictionary>

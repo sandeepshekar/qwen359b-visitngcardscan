@@ -14,7 +14,7 @@ public class MediaViewerViewModel : INotifyPropertyChanged
 {
     private readonly IMediaService _mediaService;
     private readonly IVideoService _videoService;
-    private readonly IImageLoadingService _imageLoaderService;
+    private readonly IImageLoaderService _imageLoaderService;
     private List<string> _selectedDirectories = new List<string>();
 
     // Properties for MVVM binding
@@ -22,6 +22,11 @@ public class MediaViewerViewModel : INotifyPropertyChanged
     public bool IsViewingVideo { get; private set; } = false;
     public string SelectedFilePath { get; private set; } = string.Empty;
     public object CurrentImageSource { get; private set; } // Source for the Image control in the View
+
+    // Properties for source generator binding (x:Name attributes)
+    public object? MediaDisplayArea => this;
+    public object? ImagePresenter => this;
+    public object? MediaTitleLabel => this;
 
     // State for View Mode (View All vs Select Individual Item)
     private bool _isSelectingMode = true; // Default to selection mode or 'View All' depending on requirement, let's default to viewing all first.
@@ -44,7 +49,7 @@ public class MediaViewerViewModel : INotifyPropertyChanged
         }
     }
 
-    public MediaViewerViewModel(IMediaService mediaService, IVideoService videoService, IImageLoadingService imageLoaderService)
+    public MediaViewerViewModel(IMediaService mediaService, IVideoService videoService, IImageLoaderService imageLoaderService)
     {
         _mediaService = mediaService ?? throw new ArgumentNullException(nameof(mediaService));
         _videoService = videoService ?? throw new ArgumentNullException(nameof(videoService));
@@ -123,6 +128,7 @@ public class MediaViewerViewModel : INotifyPropertyChanged
             // Handle error state in UI
         }
     }
+
     /// <summary>
     /// Loads the optimized image stream and updates the view's image source.
     /// </summary>
@@ -153,10 +159,10 @@ public class MediaViewerViewModel : INotifyPropertyChanged
     }
 
     // INotifyPropertyChanged implementation
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     protected void OnPropertyChanged([CallerMemberName] string name = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
-
-    public event PropertyChangedEventHandler PropertyChanged;
 }

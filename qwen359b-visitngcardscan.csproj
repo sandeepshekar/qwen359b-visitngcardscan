@@ -25,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\Converters\InverseBoolConverter.cs">
+      <DependentUpon>InverseBoolConverter.cs</DependentUpon>
+    </Compile>
     <Compile Update="Models\MediaItem.cs">
       <DependentUpon>MediaItem.cs</DependentUpon>
     </Compile>

@@ -12,13 +12,16 @@ namespace Qwen359b.ViewModels;
 public class GalleryViewModel : INotifyPropertyChanged
 {
     private readonly IMediaService _mediaService;
-    private readonly IImageLoadingService _imageLoaderService;
-    
+    private readonly IImageLoaderService _imageLoaderService;
+
     // Properties for MVVM binding
     public ObservableCollection<MediaItem> MediaItems { get; set; } = new ObservableCollection<MediaItem>();
     public MediaItem? SelectedMediaItem { get; set; }
     public string ThumbnailSource => SelectedMediaItem?.ThumbnailSource ?? string.Empty;
     public string FileName => SelectedMediaItem?.FileName ?? string.Empty;
+    
+    // Properties for source generator binding (x:Name attributes)
+    public object? ThumbnailImage => SelectedMediaItem?.ThumbnailSource;
 
     // State for View Mode (View All vs Select Individual Item)
     private bool _isSelectingMode = true;
@@ -37,7 +40,7 @@ public class GalleryViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public GalleryViewModel(IMediaService mediaService, IImageLoadingService imageLoaderService)
+    public GalleryViewModel(IMediaService mediaService, IImageLoaderService imageLoaderService)
     {
         _mediaService = mediaService ?? throw new ArgumentNullException(nameof(mediaService));
         _imageLoaderService = imageLoaderService ?? throw new ArgumentNullException(nameof(imageLoaderService));

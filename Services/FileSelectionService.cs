@@ -26,7 +26,7 @@ public class FileSelectionService : IFileSelectionService
 
         // NOTE: Replace these hardcoded paths with actual calls to the MAUI FilePicker API in a real project.
         selectedPaths.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "TestPhotos"));
-        selectedPaths.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Videos), "TestVideos"));
+        selectedPaths.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "TestVideos"));
 
         // Check if the simulated paths exist before returning (optional, but good practice)
         var validPaths = new List<string>();

@@ -35,7 +35,7 @@
             <Border Margin="5" CornerRadius="8" Padding="0">
                 <Grid RowDefinitions="*, Auto">
                     <!-- Thumbnail/Image Display Area -->
-                    <Image x:Name="ThumbnailImage" Grid.Row="0"
+                    <Image Grid.Row="0"
                            Source="{Binding ThumbnailSource}"
                            Aspect="AspectFill"
                            HeightRequest="200"/>

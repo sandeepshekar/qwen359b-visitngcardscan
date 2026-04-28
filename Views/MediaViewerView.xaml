@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2022/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Qwen359b.ViewModels"
-             x:Class="Qwen359b.Views.MediaViewerView"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:local="clr-namespace:Qwen359b.ViewModels"
+              xmlns:controls="clr-namespace:Qwen359b.Controls"
+              x:Class="Qwen359b.Views.MediaViewerView"
              Title="{Binding SelectedItem.FileName, StringFormat='Viewing: {0}'}">
 
     <Grid RowDefinitions="*, Auto">
         <!-- Media Display Area (Image or Video Player) -->
-        <ContentView Grid.Row="0" x:Name="MediaDisplayArea">
+        <ContentView Grid.Row="0">
             <Grid>
-                <ContentPresenter x:Name="ImagePresenter" IsVisible="{Binding IsViewingVideo, Converter={StaticResource InverseBoolConverter}}"/>
+                <ContentPresenter IsVisible="{Binding IsViewingVideo, Converter={StaticResource InverseBoolConverter}}"/>
                 <!-- Placeholder for a custom video player control that will be dynamically loaded/shown -->
-                <local:CustomVideoPlayerControl x:Name="VideoPresenter"
-                                              IsVisible="{Binding IsViewingVideo}" />
+                <controls:CustomVideoPlayerControl IsVisible="{Binding IsViewingVideo}" />
             </Grid>
         </ContentView>
 
         <!-- Controls/Info Footer -->
         <VerticalStackLayout Grid.Row="1" Padding="15" Spacing="10">
-            <Label x:Name="MediaTitleLabel" Text="{Binding SelectedItem.FileName}" FontSize="Large" FontAttributes="Bold"/>
+            <Label Text="{Binding SelectedItem.FileName}" FontSize="Large" FontAttributes="Bold"/>
             <Button Text="Back to Gallery" Clicked="GoBack_Clicked" />
         </VerticalStackLayout>
     </Grid>

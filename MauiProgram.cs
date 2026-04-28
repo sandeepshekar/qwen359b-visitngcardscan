@@ -1,8 +1,11 @@
-using CommunityToolkit.Maui;
+using Microsoft.Maui;
 using Microsoft.Extensions.DependencyInjection;
 using Qwen359b.Controls;
+using Qwen359b.Models;
 using Qwen359b.Services;
 using Qwen359b.Services.PlatformHandlers;
+using Qwen359b.ViewModels;
+using Qwen359b.Views;
 
 namespace Qwen359bVisitingCardScan;
 
@@ -13,19 +16,15 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         
         builder
-            .UseMauiCommunityToolkit()
             .UseMauiApp<App>()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             });
 
-        builder.Services.AddMauiBlazorHub();
-        builder.WebBuilder.EnableBlazorWebAssemblyLoadPathCompression = true;
-
         // Register services with dependency injection
         builder.Services.AddSingleton<IMediaService, MediaScannerService>();
-        builder.Services.AddSingleton<IImageLoadingService, ImageLoadingService>();
+        builder.Services.AddSingleton<IImageLoaderService, ImageLoadingService>();
         builder.Services.AddSingleton<IVideoService, VideoService>();
         
         // Platform-specific player handler registration
@@ -38,15 +37,15 @@ public static class MauiProgram
         #endif
 
         // Register ViewModels
-        builder.Services.AddTransient<ViewModels.MediaViewerViewModel>();
-        builder.Services.AddTransient<ViewModels.GalleryViewModel>();
+        builder.Services.AddTransient<MediaViewerViewModel>();
+        builder.Services.AddTransient<GalleryViewModel>();
 
         // Register Views
-        builder.Services.AddTransient<Views.GalleryView>();
-        builder.Services.AddTransient<Views.MediaViewerView>();
+        builder.Services.AddTransient<GalleryView>();
+        builder.Services.AddTransient<MediaViewerView>();
 
         // Register Controls
-        builder.Services.AddTransient<Controls.CustomVideoPlayerControl>();
+        builder.Services.AddTransient<CustomVideoPlayerControl>();
 
         return builder.Build();
     }

@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls;
+using Qwen359b.Models;
 using Qwen359b.Services;
 
 namespace Qwen359b.Controls;
@@ -6,9 +7,9 @@ namespace Qwen359b.Controls;
 public partial class CustomVideoPlayerControl : ContentView
 {
     private readonly IPlatformMediaPlayer _player;
-    private readonly IImageLoadingService _imageLoaderService;
+    private readonly IImageLoaderService _imageLoaderService;
 
-    public CustomVideoPlayerControl(IPlatformMediaPlayer player, IImageLoadingService imageLoaderService)
+    public CustomVideoPlayerControl(IPlatformMediaPlayer player, IImageLoaderService imageLoaderService)
     {
         InitializeComponent();
         _player = player ?? throw new ArgumentNullException(nameof(player));
