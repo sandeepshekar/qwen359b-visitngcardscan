@@ -2,62 +2,35 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <RootNamespace>Qwen359bVisitingCardScan</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <StartupObject>Qwen359bVisitingCardScan.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Models\MediaItem.cs">
-      <DependentUpon>MediaItem.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Services\FileSelectionService.cs">
-      <DependentUpon>FileSelectionService.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Services\IFileSelectionService.cs">
-      <DependentUpon>IFileSelectionService.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Services\IMediaService.cs">
-      <DependentUpon>IMediaService.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Services\IVideoService.cs">
-      <DependentUpon>IVideoService.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Services\MediaScannerService.cs">
-      <DependentUpon>MediaScannerService.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Services\IPlatformMediaPlayer.cs">
-      <DependentUpon>IPlatformMediaPlayer.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Services\VideoService.cs">
-      <DependentUpon>VideoService.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Services\PlatformHandlers\AndroidMediaPlayerHandler.cs">
-      <DependentUpon>AndroidMediaPlayerHandler.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Services\PlatformHandlers\iOSMediaPlayerHandler.cs">
-      <DependentUpon>iOSMediaPlayerHandler.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Services\PlatformHandlers\WindowsMediaPlayerHandler.cs">
-      <DependentUpon>WindowsMediaPlayerHandler.cs</DependentUpon>
-    </Compile>
-    <Compile Update="ViewModels\MediaViewerViewModel.cs">
-      <DependentUpon>MediaViewerViewModel.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Views\GalleryView.xaml.cs">
-      <DependentUpon>GalleryView.xaml.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Views\MediaViewerView.xaml.cs">
-      <DependentUpon>MediaViewerView.xaml.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Update="Controls\CustomVideoPlayerControl.xaml">
+    <Compile Remove="Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
+    </Page>
+    <Page Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="AppShell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\GalleryView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Update="Views\MediaViewerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Controls\CustomVideoPlayerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

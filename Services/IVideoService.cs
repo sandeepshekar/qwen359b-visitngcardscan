@@ -14,7 +14,7 @@ public interface IVideoService
     /// <summary>
     /// Stops any currently playing video stream.
     /// </summary>
-    void StopVideoAsync();
+    Task StopVideoAsync();
 
     /// <summary>
     /// Checks if a video is currently playing.

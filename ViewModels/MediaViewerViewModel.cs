@@ -44,13 +44,13 @@ public class MediaViewerViewModel : INotifyPropertyChanged
         }
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-    public MediaViewerViewModel(IMediaService mediaService, IVideoService videoService, IImageLoadingService imageLoaderService)
+    public MediaViewerViewModel(IMediaService? mediaService, IVideoService? videoService, IImageLoadingService? imageLoaderService)
     {
-        _mediaService = mediaService ?? throw new ArgumentNullException(nameof(mediaService));
-        _videoService = videoService ?? throw new ArgumentNullException(nameof(videoService));
-        _imageLoaderService = imageLoaderService ?? throw new ArgumentNullException(nameof(imageLoaderService));
+        _mediaService = mediaService;
+        _videoService = videoService;
+        _imageLoaderService = imageLoaderService;
     }
 
     /// <summary>
@@ -87,6 +87,7 @@ public class MediaViewerViewModel : INotifyPropertyChanged
     }
 
     /// <summary>
+    /// <summary>
     /// Handles selection of a media item and prepares the viewer for playback/display.
     /// </summary>
     public async Task SelectMediaItemAsync(MediaItem item)
@@ -94,7 +95,10 @@ public class MediaViewerViewModel : INotifyPropertyChanged
         if (item == null) return;
 
         // Reset state first
-        _videoService.StopVideoAsync();
+        if (_videoService != null)
+        {
+            await _videoService.StopVideoAsync();
+        }
         IsViewingVideo = false;
         SelectedFilePath = string.Empty;
 
@@ -106,14 +110,22 @@ public class MediaViewerViewModel : INotifyPropertyChanged
         {
             // For images, load the optimized stream and update the view's image source.
             await LoadImageForDisplayAsync(item);
+        }
     }
 
     private async Task PlayVideo(MediaItem videoItem)
     {
         try
         {
-            await _videoService.PlayVideoAsync(videoItem.FilePath);
-            IsViewingVideo = true;
+            if (_videoService != null)
+            {
+                await _videoService.PlayVideoAsync(videoItem.FilePath);
+                IsViewingVideo = true;
+            }
+            else
+            {
+                IsViewingVideo = false;
+            }
             SelectedFilePath = videoItem.FilePath;
             OnPropertyChanged(nameof(IsViewingVideo));
             OnPropertyChanged(nameof(SelectedFilePath));
@@ -131,33 +143,24 @@ public class MediaViewerViewModel : INotifyPropertyChanged
     {
         try
         {
-            // Use the optimized loader service to get a cached or loaded stream.
-            var imageStream = await _imageLoaderService.LoadImageAsync(item.FilePath);
-
-            // In MAUI, ImageSource can often take a Stream directly or require conversion.
-            // For simplicity and demonstration of the flow, we'll assume the View/Binding
-            // layer handles the stream correctly, but for robustness, we wrap it in a MemoryStream.
-            using (var ms = new MemoryStream())
+            if (_imageLoaderService != null)
             {
-                imageStream.CopyTo(ms);
-                ms.Position = 0; // Reset stream position before assignment
-
-                CurrentImageSource = ImageSource.FromStream(() => ms);
-                OnPropertyChanged(nameof(CurrentImageSource));
+                var imageStream = await _imageLoaderService.LoadImageAsync(item.FilePath);
             }
+            SelectedFilePath = item.FilePath;
+            IsViewingVideo = false;
+            OnPropertyChanged(nameof(IsViewingVideo));
+            OnPropertyChanged(nameof(SelectedFilePath));
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error loading image for display: {ex.Message}");
-            // Optionally set a placeholder error source here
         }
     }
 
     // INotifyPropertyChanged implementation
-    protected void OnPropertyChanged([CallerMemberName] string name = null)
+    protected void OnPropertyChanged([CallerMemberName] string? name = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
-
-    public event PropertyChangedEventHandler PropertyChanged;
 }

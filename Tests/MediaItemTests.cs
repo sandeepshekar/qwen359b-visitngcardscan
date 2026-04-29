@@ -1,6 +1,6 @@
 using Xunit;
 using System;
-using qwen359b-visitngcardscan.Models; // Assuming this namespace is correct for the project structure
+using Qwen359b.Models;
 
 namespace Tests
 {

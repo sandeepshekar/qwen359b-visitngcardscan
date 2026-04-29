@@ -35,8 +35,9 @@ public class VideoService : IVideoService
         }
     }
 
-    public void StopVideoAsync()
+    public Task StopVideoAsync()
     {
         _player.Stop();
+        return Task.CompletedTask;
     }
 }

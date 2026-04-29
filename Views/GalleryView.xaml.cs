@@ -1,46 +1,34 @@
-using Microsoft.Maui.Controls;
+using System.Windows.Controls;
 using Qwen359b.ViewModels;
-using System.Threading.Tasks;
 
 namespace Qwen359b.Views;
 
-public partial class GalleryView : ContentPage
+public partial class GalleryView : Page
 {
     private readonly MediaViewerViewModel _viewModel;
 
     public GalleryView()
     {
         InitializeComponent();
-        // Assuming the BindingContext is set in XAML, we can cast it here for access if needed, 
-        // but generally, interaction should go through commands/properties.
-        _viewModel = (MediaViewerViewModel)BindingContext;
+        _viewModel = new MediaViewerViewModel(null, null, null);
+        DataContext = _viewModel;
     }
 
-    private void ToggleGalleryView_Clicked(object sender, EventArgs e)
+    private void ToggleGalleryView_Clicked(object sender, System.Windows.RoutedEventArgs e)
     {
-        // Toggles the view mode using the ViewModel logic.
+        // Toggle gallery view mode
         if (_viewModel != null)
         {
-            _viewModel.ToggleViewMode();
+            _viewModel.IsViewingAllMode = !_viewModel.IsViewingAllMode;
         }
     }
 
-    private void ToggleSelectionMode_Clicked(object sender, EventArgs e)
+    private void ToggleSelectionMode_Clicked(object sender, System.Windows.RoutedEventArgs e)
     {
-        // Toggles the view mode using the ViewModel logic.
+        // Toggle selection mode
         if (_viewModel != null)
         {
-            _viewModel.ToggleViewMode();
-        }
-    }
-
-    // Event handler for item selection (assuming CollectionView is configured to handle this)
-    private async void OnMediaItemSelected(object sender, ItemTappedEventArgs e)
-    {
-        if (e.Item is Models.MediaItem selectedItem && _viewModel != null)
-        {
-            // Pass the selected item to the ViewModel for processing based on current mode.
-            await _viewModel.SelectMediaItemAsync(selectedItem);
+            // Toggle selection mode logic
         }
     }
 }

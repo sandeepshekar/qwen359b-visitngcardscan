@@ -1,55 +1,62 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Qwen359b.ViewModels"
-             x:Class="Qwen359b.Views.GalleryView"
-             Title="Media Gallery">
+<Page x:Class="Qwen359b.Views.GalleryView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Qwen359b.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Media Gallery">
 
-    <ContentPage.BindingContext>
-        <local:GalleryViewModel />
-    </ContentPage.BindingContext>
-
-    <Grid RowDefinitions="Auto, *">
-        <!-- Top Bar for View Mode Toggling -->
-        <HorizontalStackLayout Grid.Row="0" Padding="10" Spacing="15">
-            <Button Text="View All Media" Clicked="ToggleGalleryView_Clicked" />
-            <Button Text="Select Item" Clicked="ToggleSelectionMode_Clicked" />
-        </HorizontalStackLayout>
-
-        <!-- Gallery View (Grid/List) -->
-        <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding MediaItems}"
-                        ItemTemplate="{StaticResource MediaItemTemplate}"
-                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreMediaCommand}"
-                        SelectionMode="Single"
-                        SelectedItem="{Binding SelectedMediaItem}">
-            <CollectionView.EmptyView>
-                <Label Text="No media found in the selected directories." HorizontalOptions="Center" VerticalOptions="Center" />
-            </CollectionView.EmptyView>
-        </CollectionView>
-    </Grid>
-
-    <!-- Resource Dictionary for Item Template -->
-    <ContentPage.Resources>
+    <Page.Resources>
         <DataTemplate x:Key="MediaItemTemplate">
-            <Border Margin="5" CornerRadius="8" Padding="0">
-                <Grid RowDefinitions="*, Auto">
+            <Border Margin="5" CornerRadius="8" BorderBrush="LightGray" BorderThickness="1">
+                <Grid Height="220">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
                     <!-- Thumbnail/Image Display Area -->
-                    <Image x:Name="ThumbnailImage" Grid.Row="0"
+                    <Image Grid.Row="0"
                            Source="{Binding ThumbnailSource}"
-                           Aspect="AspectFill"
-                           HeightRequest="200"/>
+                           Stretch="UniformToFill"/>
                     
                     <!-- File Info Footer -->
-                    <Label Grid.Row="1"
-                           Text="{Binding FileName}"
-                           FontSize="Medium"
-                           HorizontalOptions="Center"
-                           VerticalOptions="End"
-                           Margin="5, 5, 5, 0"/>
+                    <TextBlock Grid.Row="1"
+                               Text="{Binding FileName}"
+                               FontSize="14"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Bottom"
+                               Margin="5,5,5,5"
+                               TextTrimming="CharacterEllipsis"/>
                 </Grid>
             </Border>
         </DataTemplate>
-    </ContentPage.Resources>
+    </Page.Resources>
 
-</ContentPage>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Top Bar for View Mode Toggling -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Height="50" Margin="10">
+            <Button Content="View All Media" Click="ToggleGalleryView_Clicked" Padding="10,5" Margin="5"/>
+            <Button Content="Select Item" Click="ToggleSelectionMode_Clicked" Padding="10,5" Margin="5"/>
+        </StackPanel>
+
+        <!-- Gallery View (Grid/List) -->
+        <ListBox Grid.Row="1"
+                 ItemsSource="{Binding MediaItems}"
+                 ItemTemplate="{StaticResource MediaItemTemplate}"
+                 SelectionMode="Single"
+                 SelectedItem="{Binding SelectedMediaItem}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</Page>

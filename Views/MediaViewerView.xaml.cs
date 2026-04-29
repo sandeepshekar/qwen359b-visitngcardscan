@@ -1,16 +1,21 @@
-using Microsoft.Maui.Controls;
+using System.Windows.Controls;
 using Qwen359b.ViewModels;
-using System.ComponentModel;
 
 namespace Qwen359b.Views;
 
-public partial class MediaViewerView : ContentPage
+public partial class MediaViewerView : Page
 {
     private readonly MediaViewerViewModel _viewModel;
 
     public MediaViewerView()
     {
         InitializeComponent();
-        _viewModel = (MediaViewerViewModel)BindingContext;
+        _viewModel = new MediaViewerViewModel(null, null, null);
+        DataContext = _viewModel;
+    }
+
+    private void GoBack_Clicked(object sender, System.Windows.RoutedEventArgs e)
+    {
+        NavigationService?.GoBack();
     }
 }

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Qwen359b.Controls.CustomVideoPlayerControl">
+<UserControl x:Class="Qwen359b.Controls.CustomVideoPlayerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400">
     <!-- This control will host the platform-specific media player implementation -->
-</ContentView>
+    <Grid Background="Black">
+        <TextBlock Text="Video Player" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Grid>
+</UserControl>

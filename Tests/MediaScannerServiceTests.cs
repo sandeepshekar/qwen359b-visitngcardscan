@@ -1,7 +1,7 @@
 using Xunit;
 using System.IO;
-using qwen359b-visitngcardscan.Services;
-using qwen359b-visitngcardscan.Models;
+using Qwen359b.Services;
+using Qwen359b.Models;
 
 namespace Tests
 {
